@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import AdminRouteLayout from '@/components/layout/AdminRouteLayout';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 import { RoleGuard } from '@/components/common/ProtectedRoute';
@@ -39,6 +39,14 @@ function PageLoader() {
 // Application routes
 // ---------------------------------------------------------------------------
 export default function AppRoutes() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = () => navigate('/login', { replace: true });
+    window.addEventListener('unauthorized', handler);
+    return () => window.removeEventListener('unauthorized', handler);
+  }, [navigate]);
+
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>

@@ -48,7 +48,9 @@ async function req(path, init = {}) {
 
     if (res.status === 401) {
       clearSession();
-      window.location.href = '/login';
+      // Use replace-state so the back button doesn't loop
+      window.history.replaceState(null, '', '/login');
+      window.dispatchEvent(new Event('unauthorized'));
     }
     throw new Error(msg);
   }

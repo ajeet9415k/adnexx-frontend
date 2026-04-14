@@ -39,24 +39,6 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // Default test user — bypasses backend auth
-      const TEST_USER = 'admin';
-      const TEST_PASS = 'admin123';
-
-      if (usernameOrEmail === TEST_USER && password === TEST_PASS) {
-        const sessionData = {
-          accessToken: 'test-token-for-local-dev',
-          user_id: 1,
-          username: 'admin',
-          email: 'admin@aodb.local',
-          roles: ['ADMIN'],
-          tenant_id: 1,
-        };
-        setSession(sessionData);
-        navigate(from, { replace: true });
-        return;
-      }
-
       const response = await fetch(`${env.API_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
