@@ -1,4 +1,4 @@
-// AODB Admin API Client — Master Data CRUD All endpoints: /api/v1/*
+// ADNexx API Client — Master Data CRUD All endpoints: /api/v1/*
 import env from '@/config/env';
 import { getToken, getTenantId, clearSession } from '@/utils/auth';
 

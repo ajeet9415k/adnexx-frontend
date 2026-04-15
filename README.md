@@ -1,4 +1,4 @@
-# AODB Admin — Master Data Management v1
+# ADNexx — Master Data Management v1
 
 A Next.js 14 application for managing all AODB master/reference data.
 

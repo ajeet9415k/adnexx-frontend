@@ -108,7 +108,7 @@ export default function AdminSidebar({ collapsed, onToggle }) {
               <Database size={14} color="#fff" />
             </div>
             <div>
-              <div className="sidebar-title" style={{ fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Syne, sans-serif', letterSpacing: '0.04em' }}>AODB Admin</div>
+              <div className="sidebar-title" style={{ fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Syne, sans-serif', letterSpacing: '0.04em' }}>ADNexx</div>
               <div className="sidebar-subtitle" style={{ fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'IBM Plex Mono, monospace' }}>Master Data</div>
             </div>
           </div>

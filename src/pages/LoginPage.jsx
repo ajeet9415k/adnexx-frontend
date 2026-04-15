@@ -108,7 +108,7 @@ export default function LoginPage() {
               marginBottom: '8px',
             }}
           >
-            AODB Admin
+            ADNnexx
           </h1>
           <p
             style={{
