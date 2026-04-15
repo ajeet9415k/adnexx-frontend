@@ -108,7 +108,7 @@ export default function LoginPage() {
               marginBottom: '8px',
             }}
           >
-            ADNnexx
+            ADNexx
           </h1>
           <p
             style={{
