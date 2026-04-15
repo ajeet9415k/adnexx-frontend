@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { setSession, isAuthenticated } from '@/utils/auth';
 import env from '@/config/env';
 
@@ -77,227 +77,148 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      style={{
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
+
+      {/* ── Left branding panel ── */}
+      <div style={{
+        flex: 1,
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
         justifyContent: 'center',
-        minHeight: '100vh',
+        padding: '60px 64px',
         background: 'var(--bg)',
-        padding: '16px',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '420px',
-          background: 'var(--surface-1)',
-          border: '1px solid var(--border)',
-          borderRadius: '12px',
-          padding: '40px 32px',
-        }}
-      >
-        {/* Header */}
-        <div style={{ marginBottom: '40px', textAlign: 'center' }}>
-          <h1
-            style={{
-              fontSize: '28px',
-              fontWeight: '700',
-              fontFamily: 'Syne, sans-serif',
-              color: 'var(--text-1)',
-              marginBottom: '8px',
-            }}
-          >
-            ADNexx
-          </h1>
-          <p
-            style={{
-              fontSize: '14px',
-              color: 'var(--text-2)',
-              marginBottom: '24px',
-            }}
-          >
-            Airport Operations Database Management
+        borderRight: '1px solid var(--border)',
+      }}>
+        {/* Logo + product name */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '64px' }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: '10px',
+            background: 'var(--blue)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bg)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <div>
+            <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', color: 'var(--blue)', textTransform: 'uppercase', margin: 0 }}>ADNexx Platform</p>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-1)', margin: 0 }}>Airport Operations Database (AODB)</p>
+          </div>
+        </div>
+
+        {/* Hero text */}
+        <div style={{ marginBottom: '48px' }}>
+          <h1 style={{ fontSize: '52px', fontWeight: 800, lineHeight: 1.1, color: 'var(--text-1)', margin: '0 0 4px', fontFamily: 'Syne, sans-serif' }}>Airport</h1>
+          <h1 style={{ fontSize: '52px', fontWeight: 800, lineHeight: 1.1, color: 'var(--blue)', margin: '0 0 4px', fontFamily: 'Syne, sans-serif' }}>Operations</h1>
+          <h1 style={{ fontSize: '52px', fontWeight: 800, lineHeight: 1.1, color: 'var(--text-1)', margin: '0 0 24px', fontFamily: 'Syne, sans-serif' }}>Control Platform</h1>
+          <p style={{ fontSize: '15px', color: 'var(--text-2)', maxWidth: '380px', lineHeight: 1.7, margin: 0 }}>
+            Real-time management of gates, stands, terminals, and runways with intelligent automation and conflict resolution.
           </p>
         </div>
 
-        {/* Error Alert */}
+        {/* Feature bullets */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {[
+            { title: 'Smart Resource Allocation', desc: 'AI-powered gate, stand & belt assignment' },
+            { title: 'Conflict Detection Engine', desc: 'Prevent overlaps with real-time validation' },
+            { title: 'Operational Timeline View', desc: 'Gantt-based visualization for planning & monitoring' },
+          ].map((f) => (
+            <div key={f.title} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--blue)', flexShrink: 0 }} />
+              <span style={{ fontSize: '14px', color: 'var(--text-1)', fontWeight: 600 }}>{f.title}</span>
+              <span style={{ fontSize: '13px', color: 'var(--text-3)' }}>— {f.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Right login panel ── */}
+      <div style={{
+        width: '480px',
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '60px 56px',
+        background: 'var(--surface-1)',
+      }}>
+        <div style={{ marginBottom: '40px' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 700, color: 'var(--text-1)', margin: '0 0 8px', fontFamily: 'Syne, sans-serif' }}>Sign in</h2>
+        </div>
+
+        {/* Error message */}
         {error && (
-          <div
-            style={{
-              display: 'flex',
-              gap: '12px',
-              padding: '12px 16px',
-              background: 'rgba(244, 63, 94, 0.1)',
-              border: '1px solid rgba(244, 63, 94, 0.3)',
-              borderRadius: '8px',
-              marginBottom: '24px',
-              alignItems: 'flex-start',
-            }}
-          >
-            <AlertCircle size={20} style={{ color: 'var(--red)', marginTop: '2px', flexShrink: 0 }} />
-            <p
-              style={{
-                fontSize: '14px',
-                color: 'var(--red)',
-                margin: 0,
-              }}
-            >
-              {error}
-            </p>
+          <div style={{
+            padding: '12px 16px',
+            background: 'rgba(244,63,94,0.1)',
+            border: '1px solid rgba(244,63,94,0.3)',
+            borderRadius: '8px',
+            marginBottom: '24px',
+            fontSize: '13px',
+            color: 'var(--red)',
+          }}>
+            {error}
           </div>
         )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {/* Email Field */}
+          {/* Username */}
           <div>
-            <label
-              htmlFor="usernameOrEmail"
-              style={{
-                display: 'block',
-                fontSize: '14px',
-                fontWeight: '500',
-                color: 'var(--text-1)',
-                marginBottom: '8px',
-              }}
-            >
-              Username or Email
-            </label>
+            <label className="field-label">Username / Email</label>
             <input
-              id="usernameOrEmail"
+              className="field-input"
               type="text"
-              placeholder="admin"
+              placeholder="admin@airport.com"
               value={usernameOrEmail}
               onChange={(e) => setUsernameOrEmail(e.target.value)}
               disabled={loading}
-              style={{
-                width: '100%',
-                padding: '10px 14px',
-                fontSize: '14px',
-                background: 'var(--surface-2)',
-                border: '1px solid var(--border)',
-                borderRadius: '6px',
-                color: 'var(--text-1)',
-                fontFamily: 'inherit',
-                transition: 'all 0.2s',
-                opacity: loading ? 0.6 : 1,
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = 'var(--blue)';
-                e.target.style.boxShadow = '0 0 0 2px var(--blue-glow)';
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = 'var(--border)';
-                e.target.style.boxShadow = 'none';
-              }}
             />
           </div>
 
-          {/* Password Field */}
+          {/* Password */}
           <div>
-            <label
-              htmlFor="password"
-              style={{
-                display: 'block',
-                fontSize: '14px',
-                fontWeight: '500',
-                color: 'var(--text-1)',
-                marginBottom: '8px',
-              }}
-            >
-              Password
-            </label>
-            <div
-              style={{
-                position: 'relative',
-              }}
-            >
+            <label className="field-label">Password</label>
+            <div style={{ position: 'relative' }}>
               <input
-                id="password"
+                className="field-input"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
+                placeholder="••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  paddingRight: '40px',
-                  fontSize: '14px',
-                  background: 'var(--surface-2)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '6px',
-                  color: 'var(--text-1)',
-                  fontFamily: 'inherit',
-                  transition: 'all 0.2s',
-                  opacity: loading ? 0.6 : 1,
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = 'var(--blue)';
-                  e.target.style.boxShadow = '0 0 0 2px var(--blue-glow)';
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'var(--border)';
-                  e.target.style.boxShadow = 'none';
-                }}
+                style={{ paddingRight: '44px' }}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={loading}
                 style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  color: 'var(--text-2)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  opacity: loading ? 0.5 : 1,
+                  position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
+                  color: 'var(--text-3)', display: 'flex', alignItems: 'center', padding: 0,
                 }}
               >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
               </button>
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
+            className="btn-primary"
             disabled={loading}
-            style={{
-              padding: '10px 16px',
-              fontSize: '15px',
-              fontWeight: '500',
-              background: loading ? 'var(--slate)' : 'var(--blue)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s',
-              marginTop: '8px',
-              opacity: loading ? 0.8 : 1,
-            }}
-            onMouseEnter={(e) => {
-              if (!loading) {
-                e.target.style.background = 'var(--blue-d)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!loading) {
-                e.target.style.background = 'var(--blue)';
-              }
-            }}
+            style={{ width: '100%', justifyContent: 'center', padding: '11px', fontSize: '0.9rem', marginTop: '8px' }}
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 
-
+        {/* Footer */}
+        <p style={{ marginTop: '48px', fontSize: '12px', color: 'var(--text-3)', textAlign: 'center' }}>
+          ADNexx Platform · Airport Operations Database
+        </p>
       </div>
     </div>
   );
