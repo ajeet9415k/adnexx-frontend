@@ -208,14 +208,214 @@ export const AircraftTypeAPI = {
     });
   },
 };
-export const TerminalAPI = makeCrud('/api/v1/terminals');
-export const GateAPI = makeCrud('/api/v1/gates');
-export const StandAPI = makeCrud('/api/v1/stands');
-export const RunwayAPI = makeCrud('/api/v1/runways');
-export const BeltAPI = makeCrud('/api/v1/baggage-belts');
-export const CheckinDeskAPI = makeCrud('/api/v1/checkin-desks');
-export const GroundHandlerAPI = makeCrud('/api/v1/ground-handlers');
-export const DelayCodeAPI = makeCrud('/api/v1/delay-codes');
+export const TerminalAPI = {
+  ...makeCrud('/api/v1/terminals'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/terminals/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const GateAPI = {
+  ...makeCrud('/api/v1/gates'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/gates/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const StandAPI = {
+  ...makeCrud('/api/v1/stands'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/stands/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const RunwayAPI = {
+  ...makeCrud('/api/v1/runways'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/runways/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const BeltAPI = {
+  ...makeCrud('/api/v1/baggage-belts'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/baggage-belts/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const CheckinDeskAPI = {
+  ...makeCrud('/api/v1/checkin-desks'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/checkin-desks/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const GroundHandlerAPI = {
+  ...makeCrud('/api/v1/ground-handlers'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/ground-handlers/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
+export const DelayCodeAPI = {
+  ...makeCrud('/api/v1/delay-codes'),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/delay-codes/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
+};
 
 export const UserAPI = {
   ...makeCrud('/api/v1/users'),
@@ -224,5 +424,28 @@ export const UserAPI = {
       method: 'POST',
       body: JSON.stringify({ newPassword, confirmPassword }),
     }),
+  bulkUpload: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = getToken();
+    const tenantId = getTenantId();
+    return fetch(`${API_BASE}/api/v1/users/bulk-upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(tenantId ? { 'X-Tenant-Id': tenantId } : {}),
+      },
+      body: formData,
+    }).then(async (res) => {
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try { const j = await res.json(); msg = j.message || j.error || msg; } catch {}
+        if (res.status === 401) window.location.href = '/login';
+        throw new Error(msg);
+      }
+      if (res.status === 204) return undefined;
+      return res.json();
+    });
+  },
 };
 

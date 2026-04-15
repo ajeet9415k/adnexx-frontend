@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import useSWR from 'swr';
-import { Building2 } from 'lucide-react';
+import { Building2, Upload } from 'lucide-react';
 
 import MasterPage from '@/components/ui/MasterPage';
 import FormModal, { FormRow, FormGroup, FormInput, FormSelect, FormSection } from '@/components/ui/FormModal';
@@ -19,6 +19,8 @@ export default function TerminalsPage() {
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(EMPTY);
   const [page, setPage] = useState(0);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef(null);
 
   const { data: rawData, isLoading, error, mutate } = useSWR(`/api/v1/terminals?page=${page}&size=${PAGE_SIZE}`, adminFetcher);
   const data = Array.isArray(rawData) ? rawData : (rawData?.content || []);
@@ -112,6 +114,22 @@ export default function TerminalsPage() {
     }
   }
 
+  async function handleBulkUpload(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const result = await TerminalAPI.bulkUpload(file);
+      toast.success('Bulk Upload Complete', result?.message || 'Terminals CSV uploaded successfully');
+      mutate();
+    } catch (err) {
+      toast.error('Bulk Upload Failed', err instanceof Error ? err.message : 'Failed to upload CSV');
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }
+
   const f = (k, v) => setForm((p) => ({ ...p, [k]: v }));
 
   return (
@@ -133,6 +151,28 @@ export default function TerminalsPage() {
         onEdit={openEdit}
         onDelete={handleDelete}
         addLabel="Add Terminal"
+        extraHeaderButtons={
+          hasRole('ADMIN') && (
+            <>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".csv"
+                style={{ display: 'none' }}
+                onChange={handleBulkUpload}
+              />
+              <button
+                className="btn-ghost"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                title="Bulk Upload CSV"
+              >
+                <Upload size={13} className={uploading ? 'spin' : ''} />
+                <span style={{ fontSize: '0.82rem' }}>{uploading ? 'Uploading…' : 'Bulk Upload'}</span>
+              </button>
+            </>
+          )
+        }
         stats={stats}
         page={page + 1}
         totalPages={totalPages}
