@@ -158,17 +158,6 @@ export default function GroundHandlersPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await GroundHandlerAPI.delete(row.handlerId);
-      toast.success('Handler Deleted', `${row.name} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete handler');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await GroundHandlerAPI.update(row.handlerId, { ...row, active: !row.active });
@@ -265,7 +254,6 @@ export default function GroundHandlersPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

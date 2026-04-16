@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import {
   Plus,
   Search,
   Pencil,
-  Trash2,
   RefreshCw,
   ToggleLeft,
   ToggleRight,
@@ -25,7 +23,6 @@ export default function MasterPage({
   onRefresh,
   onAdd,
   onEdit,
-  onDelete,
   onToggle,
   hasToggle,
   activeKey,
@@ -39,21 +36,6 @@ export default function MasterPage({
   extraToolbar,
   extraHeaderButtons,
 }) {
-  const [deleteTarget, setDeleteTarget] = useState(null);
-
-  function confirmDelete(row) {
-    setDeleteTarget(row);
-  }
-  function cancelDelete() {
-    setDeleteTarget(null);
-  }
-  function doDelete() {
-    if (deleteTarget) {
-      onDelete(deleteTarget);
-      setDeleteTarget(null);
-    }
-  }
-
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
       {/* Header */}
@@ -232,9 +214,6 @@ export default function MasterPage({
                       <button className="action-btn" title="Edit" onClick={() => onEdit(row)}>
                         <Pencil size={13} />
                       </button>
-                      <button className="action-btn action-btn-danger" title="Delete" onClick={() => confirmDelete(row)}>
-                        <Trash2 size={13} />
-                      </button>
                     </div>
                     )}
                   </td>
@@ -259,43 +238,7 @@ export default function MasterPage({
         </div>
       )}
 
-      {/* Delete Confirm Modal */}
-      {deleteTarget && (
-        <div className="modal-backdrop" onClick={cancelDelete}>
-          <div className="modal-box" style={{ maxWidth: 380, width: '90%' }} onClick={(e) => e.stopPropagation()}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 32 }}>
-              <div
-                style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, rgba(225,29,72,0.15), rgba(244,63,94,0.1))',
-                  border: '1px solid rgba(225,29,72,0.15)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 20,
-                }}
-              >
-                <Trash2 size={22} color="var(--red)" />
-              </div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-1)', margin: '0 0 8px', fontFamily: 'Syne, sans-serif', textAlign: 'center' }}>Delete Record</h3>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-2)', margin: '0 0 24px', lineHeight: 1.5, textAlign: 'center', maxWidth: 280 }}>
-                This action cannot be undone. Are you sure you want to delete this record?
-              </p>
-              <div style={{ display: 'flex', gap: 12, width: '100%' }}>
-                <button className="btn-ghost" onClick={cancelDelete} style={{ flex: 1, justifyContent: 'center' }}>
-                  Cancel
-                </button>
-                <button className="btn-danger" onClick={doDelete} style={{ flex: 1, justifyContent: 'center' }}>
-                  <Trash2 size={14} />
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }

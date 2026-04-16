@@ -138,17 +138,6 @@ export default function DelayCodesPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await DelayCodeAPI.delete(row.delayCodeId);
-      toast.success('Delay Code Deleted', `${row.numericCode || row.iataCode} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete delay code');
-      throw e;
-    }
-  }
-
   async function handleSubmit() {
     const payload = {
       siteCode: form.siteCode || null,
@@ -216,7 +205,6 @@ export default function DelayCodesPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Delay Code"
         extraHeaderButtons={
           hasRole('ADMIN') && (

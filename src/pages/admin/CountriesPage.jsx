@@ -82,17 +82,6 @@ export default function CountriesPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await CountryAPI.delete(row.countryId);
-      toast.success('Country Deleted', `${row.name} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete country');
-      throw e;
-    }
-  }
-
   async function handleSubmit() {
     try {
       const payload = {
@@ -157,7 +146,6 @@ export default function CountriesPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Country"
         extraHeaderButtons={
           hasRole('ADMIN') && (

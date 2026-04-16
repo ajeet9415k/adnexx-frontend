@@ -145,17 +145,6 @@ export default function AirlinesPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await AirlineAPI.delete(row.airlineId);
-      toast.success('Airline Deleted', `${row.name} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete airline');
-      throw e;
-    }
-  }
-
   async function handleSubmit() {
     // Convert empty optional UUID fields to null
     const payload = { ...form };
@@ -212,7 +201,6 @@ export default function AirlinesPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Airline"
         renderExtraActions={() => null}
         extraHeaderButtons={

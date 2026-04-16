@@ -104,17 +104,6 @@ export default function RunwaysPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await RunwayAPI.delete(row.runwayId);
-      toast.success('Runway Deleted', `Runway ${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete runway');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await RunwayAPI.update(row.runwayId, { ...row, active: !row.active });
@@ -186,7 +175,6 @@ export default function RunwaysPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

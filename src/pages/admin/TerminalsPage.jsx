@@ -77,18 +77,6 @@ export default function TerminalsPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await TerminalAPI.delete(row.terminalId);
-      toast.success('Terminal Deleted', `${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete terminal');
-      throw e;
-    }
-  }
-
-
   async function handleSubmit() {
     try {
       const payload = {
@@ -149,7 +137,6 @@ export default function TerminalsPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Terminal"
         extraHeaderButtons={
           hasRole('ADMIN') && (

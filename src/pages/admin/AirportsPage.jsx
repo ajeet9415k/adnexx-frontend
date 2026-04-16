@@ -156,17 +156,6 @@ export default function AirportsPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await AirportAPI.delete(row.airportId);
-      toast.success('Airport Deleted', `${row.name} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete airport');
-      throw e;
-    }
-  }
-
   async function handleSubmit() {
     try {
       const payload = {
@@ -251,7 +240,6 @@ export default function AirportsPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Airport"
         extraHeaderButtons={
           hasRole('ADMIN') && (

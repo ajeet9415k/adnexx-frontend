@@ -142,18 +142,6 @@ export default function UsersPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    const id = row.user_id || row.userId || row.id;
-    try {
-      await UserAPI.delete(id);
-      toast.success('User Deleted', `${row.username} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete user');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     const id = row.user_id || row.userId || row.id;
     const active = isActive(row);
@@ -257,7 +245,6 @@ export default function UsersPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="is_active"

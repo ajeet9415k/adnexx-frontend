@@ -100,17 +100,6 @@ export default function AircraftTypesPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await AircraftTypeAPI.delete(row.aircraftTypeId);
-      toast.success('Aircraft Type Deleted', `${row.iataCode} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete aircraft type');
-      throw e;
-    }
-  }
-
   async function handleSubmit() {
     try {
       const payload = {
@@ -180,7 +169,6 @@ export default function AircraftTypesPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         addLabel="Add Aircraft Type"
         extraHeaderButtons={
           hasRole('ADMIN') && (

@@ -143,17 +143,6 @@ export default function CheckinDesksPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await CheckinDeskAPI.delete(row.deskId);
-      toast.success('Desk Deleted', `Desk ${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete desk');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await CheckinDeskAPI.update(row.deskId, { ...row, active: !row.active });
@@ -225,7 +214,6 @@ export default function CheckinDesksPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

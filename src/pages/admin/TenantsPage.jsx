@@ -103,17 +103,6 @@ export default function TenantsPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await TenantAPI.delete(row.tenantId);
-      toast.success('Tenant Deleted', `${row.name} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete tenant');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await TenantAPI.update(row.tenantId, { ...row, active: !row.active });
@@ -182,7 +171,6 @@ export default function TenantsPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

@@ -177,17 +177,6 @@ export default function StandsPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await StandAPI.delete(row.standId);
-      toast.success('Stand Deleted', `Stand ${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete stand');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await StandAPI.update(row.standId, { ...row, active: !row.active });
@@ -263,7 +252,6 @@ export default function StandsPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

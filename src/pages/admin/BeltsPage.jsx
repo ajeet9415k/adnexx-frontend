@@ -129,17 +129,6 @@ export default function BeltsPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await BeltAPI.delete(row.beltId);
-      toast.success('Belt Deleted', `Belt ${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete belt');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await BeltAPI.update(row.beltId, { ...row, active: !row.active });
@@ -209,7 +198,6 @@ export default function BeltsPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"

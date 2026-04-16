@@ -134,17 +134,6 @@ export default function GatesPage() {
     setModalOpen(true);
   }
 
-  async function handleDelete(row) {
-    try {
-      await GateAPI.delete(row.gateId);
-      toast.success('Gate Deleted', `Gate ${row.code} has been removed`);
-      mutate();
-    } catch (e) {
-      toast.error('Delete Failed', e instanceof Error ? e.message : 'Failed to delete gate');
-      throw e;
-    }
-  }
-
   async function handleToggle(row) {
     try {
       await GateAPI.update(row.gateId, { ...row, active: !row.active });
@@ -216,7 +205,6 @@ export default function GatesPage() {
         onRefresh={() => mutate()}
         onAdd={openAdd}
         onEdit={openEdit}
-        onDelete={handleDelete}
         onToggle={handleToggle}
         hasToggle
         activeKey="active"
