@@ -138,6 +138,7 @@ export default function TerminalsPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Terminal"
+        templateFile="terminals.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

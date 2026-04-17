@@ -258,6 +258,7 @@ export default function GroundHandlersPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Handler"
+        templateFile="ground-handlers.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

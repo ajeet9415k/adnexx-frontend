@@ -170,6 +170,7 @@ export default function AircraftTypesPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Aircraft Type"
+        templateFile="aircraft-types.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

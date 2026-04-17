@@ -179,6 +179,7 @@ export default function RunwaysPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Runway"
+        templateFile="runways.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

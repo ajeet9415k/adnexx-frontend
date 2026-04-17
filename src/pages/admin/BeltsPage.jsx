@@ -202,6 +202,7 @@ export default function BeltsPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Belt"
+        templateFile="belts.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

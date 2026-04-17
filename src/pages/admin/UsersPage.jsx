@@ -249,6 +249,7 @@ export default function UsersPage() {
         hasToggle
         activeKey="is_active"
         addLabel="Add User"
+        templateFile="users.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

@@ -241,6 +241,7 @@ export default function AirportsPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Airport"
+        templateFile="airports.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

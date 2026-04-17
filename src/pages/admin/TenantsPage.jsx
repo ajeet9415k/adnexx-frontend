@@ -175,6 +175,7 @@ export default function TenantsPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Tenant"
+        templateFile="tenants.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

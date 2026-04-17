@@ -7,6 +7,7 @@ import {
   ToggleRight,
   ChevronLeft,
   ChevronRight,
+  Download,
 } from 'lucide-react';
 
 export default function MasterPage({
@@ -35,6 +36,7 @@ export default function MasterPage({
   renderExtraActions,
   extraToolbar,
   extraHeaderButtons,
+  templateFile,
 }) {
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -87,6 +89,18 @@ export default function MasterPage({
 
         {!readOnly && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+            {templateFile && (
+              <a
+                href={`/templates/${templateFile}`}
+                download={templateFile}
+                className="btn-ghost"
+                title="Download CSV Template"
+                style={{ textDecoration: 'none' }}
+              >
+                <Download size={13} />
+                <span style={{ fontSize: '0.82rem' }}>Template</span>
+              </a>
+            )}
             {extraHeaderButtons}
             <button
               className="btn-primary"

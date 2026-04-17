@@ -209,6 +209,7 @@ export default function GatesPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Gate"
+        templateFile="gates.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

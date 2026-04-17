@@ -147,6 +147,7 @@ export default function CountriesPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Country"
+        templateFile="countries.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

@@ -218,6 +218,7 @@ export default function CheckinDesksPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Desk"
+        templateFile="checkin-desks.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

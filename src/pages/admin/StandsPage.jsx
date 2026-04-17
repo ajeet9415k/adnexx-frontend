@@ -256,6 +256,7 @@ export default function StandsPage() {
         hasToggle
         activeKey="active"
         addLabel="Add Stand"
+        templateFile="stands.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>

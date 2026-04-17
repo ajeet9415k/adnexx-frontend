@@ -202,6 +202,7 @@ export default function AirlinesPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Airline"
+        templateFile="airlines.csv"
         renderExtraActions={() => null}
         extraHeaderButtons={
           hasRole('ADMIN') && (

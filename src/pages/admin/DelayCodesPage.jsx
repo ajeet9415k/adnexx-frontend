@@ -206,6 +206,7 @@ export default function DelayCodesPage() {
         onAdd={openAdd}
         onEdit={openEdit}
         addLabel="Add Delay Code"
+        templateFile="delay-codes.csv"
         extraHeaderButtons={
           hasRole('ADMIN') && (
             <>
